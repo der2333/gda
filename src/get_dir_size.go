@@ -1,21 +1,30 @@
 package gda
 
 import (
-	"os"
-	"path/filepath"
+	"io/fs"
+
+	"github.com/charlievieth/fastwalk"
 )
 
 func GetDirSize(path string) (int64, error) {
 	var dirSize int64
-	err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+
+	conf := fastwalk.Config{}
+
+	walkFn := func(path string, target fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		if !info.IsDir() {
+		if !target.IsDir() {
+			info, err := target.Info()
+			if err != nil {
+				return err
+			}
 			dirSize += info.Size()
 		}
 		return nil
-	})
+	}
+	err := fastwalk.Walk(&conf, path, walkFn)
 
 	return dirSize, err
 }
