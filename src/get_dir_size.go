@@ -24,6 +24,7 @@ func GetDirSize(path string) (int64, error) {
 		}
 		return nil
 	}
+
 	err := fastwalk.Walk(&conf, path, walkFn)
 
 	return dirSize, err

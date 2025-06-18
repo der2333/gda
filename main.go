@@ -13,7 +13,7 @@ func main() {
 	args := flag.Args()
 
 	if len(args) == 0 {
-		fmt.Printf("Usage: gda <directory>")
+		fmt.Println("Usage: gda <directory>")
 		os.Exit(1)
 	}
 
