@@ -17,12 +17,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	targetDir := args[0]
-	dirSize, err := gda.GetDirSize(targetDir)
+	root := args[0]
+	rootSize, err := gda.GetDirSize(root)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Size of directory '%s': %s\n", targetDir, gda.ReadableSize(dirSize))
+	fmt.Printf("Size of directory '%s': %s\n", root, gda.ReadableSize(rootSize))
 }
