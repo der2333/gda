@@ -3,14 +3,20 @@ package gda
 import "fmt"
 
 func ReadableSize(bytes int64) string {
-	const unit = 1024
+	const unit = 1000
 	if bytes < unit {
 		return fmt.Sprintf("%d B", bytes)
 	}
-	div, exp := int64(unit), 0
-	for n := bytes / unit; n >= unit; n /= unit {
-		div *= unit
-		exp++
+
+	// 使用浮点数来保持精度
+	value := float64(bytes)
+	units := []string{"B", "KB", "MB", "GB", "TB", "PB", "EB"}
+	index := 0
+
+	for value >= unit && index < len(units)-1 {
+		value /= unit
+		index++
 	}
-	return fmt.Sprintf("%.1f %cB", float64(bytes)/float64(div), "KMGTPE"[exp])
+
+	return fmt.Sprintf("%.2f %s", value, units[index])
 }
