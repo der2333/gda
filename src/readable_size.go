@@ -2,7 +2,7 @@ package gda
 
 import "fmt"
 
-func ReadableSize(bytes int64) string {
+func readableSize(bytes int64) string {
 	const unit = 1024
 	if bytes < unit {
 		return fmt.Sprintf("%d B", bytes)

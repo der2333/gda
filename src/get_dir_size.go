@@ -13,7 +13,7 @@ type DirInfo struct {
 	Size int64
 }
 
-func GetDirSize(root string) (int64, []DirInfo, error) {
+func getDirSize(root string) (int64, []DirInfo, error) {
 	// 对root目录进行规范化处理
 	root = filepath.Clean(root)
 
